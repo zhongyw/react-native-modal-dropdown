@@ -91,7 +91,12 @@ class Demo extends Component {
             <ModalDropdown ref={el => this._dropdown_3 = el}
                            style={styles.dropdown_3}
                            options={DEMO_OPTIONS_1}
+                           renderBtnRightIcon={()=>{
+                             return <Image source={require('./images/select-open.png')} style={{width: 20, height: 10, marginRight: 12, marginTop: 5}}/>
+                           }}
                            adjustFrame={style => this._dropdown_3_adjustFrame(style)}
+                           textStyle={styles.dropdown_3_textStyle}
+                           defaultValue="请输入"
                            dropdownTextStyle={styles.dropdown_3_dropdownTextStyle}
                            dropdownTextHighlightStyle={styles.dropdown_3_dropdownTextHighlightStyle}
             />
@@ -172,8 +177,8 @@ class Demo extends Component {
 
   _dropdown_3_adjustFrame(style) {
     console.log(`frameStyle={width:${style.width}, height:${style.height}, top:${style.top}, left:${style.left}, right:${style.right}}`);
-    style.top -= 15;
-    style.left += 150;
+    style.top += 12;
+    style.left += 0;
     return style;
   }
 
@@ -306,14 +311,22 @@ const styles = StyleSheet.create({
     backgroundColor: 'cornflowerblue',
   },
   dropdown_3: {
-    width: 150,
+    width: 250,
+    height: 40,
     borderColor: 'lightgray',
+    justifyContent: 'center',
     borderWidth: 1,
-    borderRadius: 1,
+    borderRadius: 20,
+  },
+  dropdown_3_textStyle: {
+      fontSize: 16,
+      marginLeft: 10
   },
   dropdown_3_dropdownTextStyle: {
-    backgroundColor: '#000',
-    color: '#fff'
+    width: 250,
+    backgroundColor: '#fff',
+    fontSize: 14,
+    color: '#333'
   },
   dropdown_3_dropdownTextHighlightStyle: {
     backgroundColor: '#fff',
