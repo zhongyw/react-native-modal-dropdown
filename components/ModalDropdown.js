@@ -55,6 +55,8 @@ export default class ModalDropdown extends Component {
     renderSeparator: PropTypes.func,
     renderButtonText: PropTypes.func,
 
+    renderBtnRightIcon: PropTypes.func,
+
     onDropdownWillShow: PropTypes.func,
     onDropdownWillHide: PropTypes.func,
     onSelect: PropTypes.func
@@ -163,7 +165,7 @@ export default class ModalDropdown extends Component {
   }
 
   _renderButton() {
-    const {disabled, accessible, children, textStyle} = this.props;
+    const {disabled, accessible, children, textStyle, renderBtnRightIcon = ()=>{return null}} = this.props;
     const {buttonText} = this.state;
 
     return (
@@ -181,6 +183,9 @@ export default class ModalDropdown extends Component {
               >
                 {buttonText}
               </Text>
+              {
+                  renderBtnRightIcon()
+              }
             </View>
           )
         }
@@ -400,10 +405,13 @@ export default class ModalDropdown extends Component {
 
 const styles = StyleSheet.create({
   button: {
-    justifyContent: 'center'
+    justifyContent: 'center',
+    flexDirection: 'row'
   },
   buttonText: {
-    fontSize: 12
+    flex: 1,
+    fontSize: 12,
+
   },
   modal: {
     flexGrow: 1
