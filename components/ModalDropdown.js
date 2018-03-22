@@ -38,6 +38,7 @@ export default class ModalDropdown extends Component {
     defaultIndex: PropTypes.number,
     defaultValue: PropTypes.string,
     options: PropTypes.array,
+    textField: PropTypes.string, // 在option中显示的字段
 
     accessible: PropTypes.bool,
     animated: PropTypes.bool,
@@ -309,7 +310,7 @@ export default class ModalDropdown extends Component {
   }
 
   _renderRow = (rowData, sectionID, rowID, highlightRow) => {
-    const {renderRow, dropdownTextStyle, dropdownTextHighlightStyle, accessible} = this.props;
+    const {renderRow, dropdownTextStyle, dropdownTextHighlightStyle, accessible, textField} = this.props;
     const {selectedIndex} = this.state;
     const key = `row_${rowID}`;
     const highlighted = rowID == selectedIndex;
@@ -321,7 +322,7 @@ export default class ModalDropdown extends Component {
         highlighted && dropdownTextHighlightStyle
       ]}
       >
-        {rowData}
+        { !textField ? rowData : rowData[textField] }
       </Text>) :
       renderRow(rowData, rowID, highlighted);
     const preservedProps = {
@@ -375,10 +376,10 @@ export default class ModalDropdown extends Component {
   };
 
   _onRowPress(rowData, sectionID, rowID, highlightRow) {
-    const {onSelect, renderButtonText, onDropdownWillHide} = this.props;
+    const {onSelect, renderButtonText, onDropdownWillHide, textField} = this.props;
     if (!onSelect || onSelect(rowID, rowData) !== false) {
       highlightRow(sectionID, rowID);
-      const value = renderButtonText && renderButtonText(rowData) || rowData.toString();
+      const value = renderButtonText && renderButtonText(rowData) || (!textField ? rowData.toString(): rowData[textField]);
       this._nextValue = value;
       this._nextIndex = rowID;
       this.setState({

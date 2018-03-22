@@ -97,8 +97,7 @@ class Demo extends Component {
                            onSelect={(index, rowData)=>{
                              console.log('rowData=', rowData);
                            }}
-                           renderRow={this._dropdown_2_renderRow.bind(this)}
-                           renderButtonText={(rowData) => this._dropdown_2_renderButtonText(rowData)}
+                           textField="name"
                            adjustFrame={style => this._dropdown_3_adjustFrame(style)}
                            textStyle={styles.dropdown_3_textStyle}
                            defaultValue="请输入"
