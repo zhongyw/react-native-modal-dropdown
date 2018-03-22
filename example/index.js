@@ -90,10 +90,15 @@ class Demo extends Component {
             </Text>
             <ModalDropdown ref={el => this._dropdown_3 = el}
                            style={styles.dropdown_3}
-                           options={DEMO_OPTIONS_1}
+                           options={DEMO_OPTIONS_2}
                            renderBtnRightIcon={()=>{
                              return <Image source={require('./images/select-open.png')} style={{width: 20, height: 10, marginRight: 12, marginTop: 5}}/>
                            }}
+                           onSelect={(index, rowData)=>{
+                             console.log('rowData=', rowData);
+                           }}
+                           renderRow={this._dropdown_2_renderRow.bind(this)}
+                           renderButtonText={(rowData) => this._dropdown_2_renderButtonText(rowData)}
                            adjustFrame={style => this._dropdown_3_adjustFrame(style)}
                            textStyle={styles.dropdown_3_textStyle}
                            defaultValue="请输入"
